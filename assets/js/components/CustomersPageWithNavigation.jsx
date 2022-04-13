@@ -48,7 +48,7 @@ const CustomersPageWithPagination = (props) => {
     };
 
     const paginatedCustomers = Pagination.getData(customers, currentPage, itemsPerPage);
-    
+
     return (
         <>
             <h1>Liste des clients ( pagination )</h1>
@@ -65,38 +65,38 @@ const CustomersPageWithPagination = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {loading === 0 && 
-                    <tr >
-                        <td>Chargement...</td>
-                    </tr>}
+                    {loading === 0 &&
+                        <tr >
+                            <td>Chargement...</td>
+                        </tr>}
                     {!loading &&
-                    customers.map(customer => <tr key={customer.id}>
-                        <td>{customer.id}</td>
-                        <td>
-                            <a href="#">{customer.firstName} {customer.lastName}</a>
-                        </td>
-                        <td>{customer.email}</td>
-                        <td>{customer.company}</td>
-                        <td className='text-center'>
-                            <span className="badge badge-primary">{customer.invoices.length}</span>
-                        </td>
-                        <td className='text-center'>{customer.totalAmount.toLocaleString()} €</td>
-                        <td>
-                            <button
-                                onClick={() => handleDelete(customer.id)}
-                                disabled={customer.invoices.length > 0}
-                                className="btn btn-sm btn-danger text-center">Supprimer</button>
-                        </td>
-                    </tr>)}
+                        customers.map(customer => <tr key={customer.id}>
+                            <td>{customer.id}</td>
+                            <td>
+                                <a href="#">{customer.firstName} {customer.lastName}</a>
+                            </td>
+                            <td>{customer.email}</td>
+                            <td>{customer.company}</td>
+                            <td className='text-center'>
+                                <span className="badge badge-primary">{customer.invoices.length}</span>
+                            </td>
+                            <td className='text-center'>{customer.totalAmount.toLocaleString()} €</td>
+                            <td>
+                                <button
+                                    onClick={() => handleDelete(customer.id)}
+                                    disabled={customer.invoices.length > 0}
+                                    className="btn btn-sm btn-danger text-center">Supprimer</button>
+                            </td>
+                        </tr>)}
 
                 </tbody>
             </table>
-            <Pagination 
-            currentPage={currentPage} 
-            itemsPerPage={itemsPerPage} 
-            length={totalItems} 
-            onPageChanged={handlePageChange}/>
-            
+            <Pagination
+                currentPage={currentPage}
+                itemsPerPage={itemsPerPage}
+                length={totalItems}
+                onPageChanged={handlePageChange} />
+
         </>
     );
 }
