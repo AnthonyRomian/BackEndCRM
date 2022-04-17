@@ -27,6 +27,7 @@ const CustomersPage = (props) => {
     // chargment du composant => recherche  customers
     useEffect(() => {
         fetchCustomers();
+
         /* CustomersAPI.findAll()
            .then(data => setCustomers(data))
            .catch(error => console.log(error.response)); */
