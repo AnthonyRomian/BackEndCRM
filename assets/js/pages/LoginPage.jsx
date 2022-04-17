@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
+import Field from '../components/forms/Field';
 import AuthContext from '../contexts/AuthContext';
 import AuthAPI from '../services/AuthAPI';
 
@@ -40,31 +41,22 @@ const LoginPage = ({ history }) => {
             <h1>Connexion</h1>
 
             <form onSubmit={handleSubmit} >
+                <Field 
+                label="Adresse email" 
+                name="username" 
+                value={credentials.username} 
+                onChange={handleChange} 
+                placeholder="Adresse email de connexion"
+                error={error} />
 
-                <div className="form-group">
-                    <label htmlFor="username">Adresse Email</label>
-                    <input
-                        value={credentials.username}
-                        onChange={handleChange}
-                        className={"form-control" + (error && " is-invalid")}
-                        type="email"
-                        placeholder="Adresse email de connexion"
-                        name="username"
-                        id="username" />
-                    {error && <p className="invalid-feedback">{error}</p>}
-                </div>
-
-                <div className="form-group">
-                    <label htmlFor="password">Adresse Email</label>
-                    <input
-                        value={credentials.password}
-                        onChange={handleChange}
-                        className="form-control"
-                        type="password"
-                        placeholder="Mot de passe"
-                        name="password"
-                        id="password" />
-                </div>
+                <Field 
+                label="Mot de passe" 
+                name="password" 
+                value={credentials.password} 
+                onChange={handleChange} 
+                type="password"
+                error="" />
+                
                 <div className="form-group">
                     <button
                         type="submit"

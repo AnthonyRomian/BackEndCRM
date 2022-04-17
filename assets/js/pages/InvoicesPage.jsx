@@ -1,5 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from '../components/Pagination';
 import invoicesAPI from '../services/invoicesAPI';
 
@@ -94,7 +95,11 @@ useEffect(()=> {
 
     return (
         <>
+        <div className="d-flex justifiy-content-between align-items-center">
             <h1>Liste des Factures</h1>
+            <Link className="btn btn-primary" to="/invoices/new" >Créer une facture</Link>
+
+        </div>
             <div className="form-group">
                 <input type="text" onChange={handleSearch} value={search} className="form-control" placeholder="Rechercher..." />
             </div>
@@ -119,7 +124,9 @@ useEffect(()=> {
                         </td>
                         <td className='text-center'>{invoice.amount.toLocaleString()} €</td>
                         <td>
-                            <button className="btn btn-sm btn-primary mr-2">Editer</button>
+                            <Link
+                            to={"/invoices/" + invoice.id}
+                            className="btn btn-sm btn-primary mr-2">Editer</Link>
                             <button onClick={() => handleDelete(invoice.id)} className="btn btn-sm btn-danger" >Supprimer</button>
                         </td>
                     </tr> )}
