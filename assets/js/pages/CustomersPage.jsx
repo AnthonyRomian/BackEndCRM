@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import TableLoader from '../components/loaders/TableLoader';
 import Pagination from '../components/Pagination';
 import CustomersAPI from '../services/customersAPI';
 
@@ -18,16 +20,16 @@ const CustomersPage = (props) => {
             setCustomers(data);
             setLoading(false);
         } catch (error) {
-            console.log(error.response);       
+            toast.error("Impossible de charger les clients");
         }
     };
 
     // chargment du composant => recherche  customers
     useEffect(() => {
-        fetchCustomers();        
-         /* CustomersAPI.findAll()
-            .then(data => setCustomers(data))
-            .catch(error => console.log(error.response)); */
+        fetchCustomers();
+        /* CustomersAPI.findAll()
+           .then(data => setCustomers(data))
+           .catch(error => console.log(error.response)); */
     }, [])
 
     // gestion de delete client
@@ -41,8 +43,10 @@ const CustomersPage = (props) => {
         // 1 approche pessimiste ( alors solution avec copie de tableau )
         try {
             await CustomersAPI.delete(id);
+            toast.success("Le client à bien été supprimé")
         } catch (error) {
             setCustomers(originalCustomers);
+            toast.error("La suppression à échouée")
         }
 
         // meme chose qu au dessus
@@ -68,15 +72,15 @@ const CustomersPage = (props) => {
     // <filtrage customers recherche
     const filteredCustomers = customers.filter(
         c => c.firstName.toLowerCase().includes(search.toLowerCase()) ||
-        c.lastName.toLowerCase().includes(search.toLowerCase()) ||
-        c.email.toLowerCase().includes(search.toLowerCase()) ||
-        (c.company && c.company.toLowerCase().includes(search.toLowerCase()))
+            c.lastName.toLowerCase().includes(search.toLowerCase()) ||
+            c.email.toLowerCase().includes(search.toLowerCase()) ||
+            (c.company && c.company.toLowerCase().includes(search.toLowerCase()))
     );
 
     //pagination donnes
-    const paginatedCustomers =  Pagination.getData(
-        filteredCustomers, 
-        currentPage, 
+    const paginatedCustomers = Pagination.getData(
+        filteredCustomers,
+        currentPage,
         itemsPerPage);
 
     // solution 1 pour recherche dans pagination
@@ -84,7 +88,7 @@ const CustomersPage = (props) => {
     filteredCustomers.length > itemsPerPage 
     ? Pagination.getData(filteredCustomers, currentPage, itemsPerPage)
     : filteredCustomers; */
-    
+
     return (
         <>
             <div className="mb-3 d-flex justify-content-between align-items-center">
@@ -107,11 +111,11 @@ const CustomersPage = (props) => {
                         <th></th>
                     </tr>
                 </thead>
-                <tbody>
+                {!loading && <tbody>
                     {paginatedCustomers.map(customer => <tr key={customer.id}>
                         <td>{customer.id}</td>
                         <td>
-                            <a href="#">{customer.firstName} {customer.lastName}</a>
+                            <Link to={"/customers/" + customer.id}>{customer.firstName} {customer.lastName}</Link>
                         </td>
                         <td>{customer.email}</td>
                         <td>{customer.company}</td>
@@ -127,16 +131,17 @@ const CustomersPage = (props) => {
                         </td>
                     </tr>)}
 
-                </tbody>
+                </tbody>}
             </table>
+            {loading && <TableLoader/>}
 
-            {itemsPerPage <  filteredCustomers.length && (
-            <Pagination 
-            currentPage={currentPage} 
-            itemsPerPage={itemsPerPage} 
-            length={filteredCustomers.length} 
-            onPageChanged={handlePageChange}/>)}
-            
+            {itemsPerPage < filteredCustomers.length && (
+                <Pagination
+                    currentPage={currentPage}
+                    itemsPerPage={itemsPerPage}
+                    length={filteredCustomers.length}
+                    onPageChanged={handlePageChange} />)}
+
         </>
     );
 }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState, useContext } from 'react';
+import { toast } from 'react-toastify';
 import Field from '../components/forms/Field';
 import AuthContext from '../contexts/AuthContext';
 import AuthAPI from '../services/AuthAPI';
@@ -30,9 +31,11 @@ const LoginPage = ({ history }) => {
             await AuthAPI.authenticate(credentials);
             setError("");
             setIsAuthenticated(true);
+            toast.success("Vous êtes désormais connecté !")
             history.replace("/customers");
         } catch (error) {
             setError("Aucun compte ou les informations sont erronées");
+            toast.error("Une erreur est survenue !")
         }
     };
 

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import { HashRouter, Route, Switch, withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 // start the Stimulus application
 import './bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
+
 import Navbar from './js/components/Navbar';
 import PrivateRoute from './js/components/PrivateRoute';
 import AuthContext from './js/contexts/AuthContext';
@@ -17,6 +19,7 @@ import LoginPage from './js/pages/LoginPage';
 import AuthAPI from './js/services/AuthAPI';
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 AuthAPI.setup();
 
@@ -55,7 +58,9 @@ const App = () => {
                     </Switch>
                 </main>
             </HashRouter>
+            <ToastContainer position={toast.POSITION.BOTTOM_LEFT}/>
         </AuthContext.Provider>
+        
     );
 };
 
