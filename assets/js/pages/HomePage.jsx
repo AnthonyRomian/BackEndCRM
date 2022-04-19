@@ -3,19 +3,20 @@ import React from 'react';
 const HomePage = (props) => {
     return ( 
         <div className="jumbotron">
-      <h1 className="display-3">Hello, world!</h1>
+      <h1 className="display-3">CRM Lite</h1>
+            <h2>Outil de gestion de statut de facture</h2>
+          <h3>Back end</h3>
       <p className="lead">
-        This is a simple hero unit, a simple jumbotron-style component for
-        calling extra attention to featured content or information.
+        Pour compléter mes compétences sur le framework <strong>Symfony</strong> j'ai pu utiliser <strong>API Platform</strong>
       </p>
       <hr className="my-4" />
-      <p>
-        It uses utility classes for typography and spacing to space content out
-        within the larger container.
+          <h3>Front end</h3>
+      <p className="lead">
+        Il à été réalisé avec le framework <strong>React</strong>, ce qui m'a permit de découvrir beaucoup de fonctionnalitées
       </p>
       <p className="lead">
-        <a className="btn btn-primary btn-lg" href="#" role="button">
-          Learn more
+        <a className="btn btn-primary btn-lg" target="_blank" href="https://github.com/AnthonyRomian/CRM-Lite-ApiPlatform-React" role="button">
+          Voir le depot Git
         </a>
       </p>
     </div>

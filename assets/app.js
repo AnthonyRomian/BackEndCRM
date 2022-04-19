@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter, Route, Switch, withRouter } from 'react-router-dom/cjs/react-router-dom.min';
+import { HashRouter, Route, Switch, withRouter } from "react-router-dom";
 // start the Stimulus application
 import 'bootswatch/dist/materia/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,8 +17,7 @@ import InvoicesPage from './js/pages/InvoicesPage';
 import InvoicePage from './js/pages/InvoicePage';
 import LoginPage from './js/pages/LoginPage';
 import AuthAPI from './js/services/AuthAPI';
-// any CSS you import will output into a single css file (app.css in this case)
-import './styles/app.css';
+
 import { ToastContainer, toast } from 'react-toastify';
 
 AuthAPI.setup();
