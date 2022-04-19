@@ -3,8 +3,6 @@ import ReactDOM from 'react-dom';
 import { HashRouter, Route, Switch, withRouter } from 'react-router-dom/cjs/react-router-dom.min';
 // start the Stimulus application
 import 'bootswatch/dist/materia/bootstrap.min.css';
-import './bootstrap';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 import Navbar from './js/components/Navbar';

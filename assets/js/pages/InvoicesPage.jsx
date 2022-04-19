@@ -102,7 +102,7 @@ const InvoicesPage = props => {
 
     return (
         <>
-            <div className="d-flex justifiy-content-between align-items-center">
+            <div className="mb-3 d-flex justify-content-between align-items-center">
                 <h1>Liste des Factures</h1>
                 <Link className="btn btn-primary" to="/invoices/new" >Créer une facture</Link>
 
