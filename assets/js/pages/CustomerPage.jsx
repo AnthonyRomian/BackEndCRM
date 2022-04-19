@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { async } from 'regenerator-runtime';
 import Field from '../components/forms/Field';
 import FormContentLoader from '../components/loaders/FormContentLoader';
 import customersAPI from '../services/customersAPI';
@@ -59,7 +58,7 @@ const CustomerPage = ({ match, history }) => {
     const handleSubmit = async event => {
         event.preventDefault();
         try {
-            setErrors(apiErrors);
+            setErrors({});
             if (editing) {
                 await customersAPI.update(id, customer);
                 toast.success("Le client à bien été modifié")
@@ -69,21 +68,21 @@ const CustomerPage = ({ match, history }) => {
                 history.replace("/customers");
             }
 
-            setErrors({});
+            
         } catch ({ response }) {
             const { violations } = response.data;
-
-            if (response.data.violations) {
-                const apiErrors = {};
-                violations.forEach(({ propertyPath, message }) => {
-                    apiErrors[propertyPath] = message;
-                });
-                toast.error("Des erreurs dans votre formulaire");
-            };
+      
+            if (violations) {
+              const apiErrors = {};
+              violations.forEach(({ propertyPath, message }) => {
+                apiErrors[propertyPath] = message;
+              });
+      
+              setErrors(apiErrors);
+              toast.error("Des erreurs dans votre formulaire !");
+            }
         }
-
-        console.log(customer);
-    }
+    };
 
     return (
         <>

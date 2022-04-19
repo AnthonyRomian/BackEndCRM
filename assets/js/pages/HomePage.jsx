@@ -12,7 +12,7 @@ const HomePage = (props) => {
       <hr className="my-4" />
           <h3>Front end</h3>
       <p className="lead">
-        Il à été réalisé avec le framework <strong>React</strong>, ce qui m'a permit de découvrir beaucoup de fonctionnalitées
+        Il à été réalisé avec le framework <strong>React</strong>, ce qui m'a permit de découvrir beaucoup de fonctionnalités
       </p>
       <p className="lead">
         <a className="btn btn-primary btn-lg" target="_blank" href="https://github.com/AnthonyRomian/CRM-Lite-ApiPlatform-React" role="button">
